@@ -8,6 +8,7 @@ using Application.Features.Customers.Queries;
 using Domain.Entities;
 using Infrastructure.DataAccessManagers.EFCores.ODatas;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 using WebAPI.Common.Filters;
@@ -105,7 +106,7 @@ public class CustomerController : BaseApiController
     }
 
 
-    [ClaimBasedAuthorization("Read")]
+    [Authorize]
     [HttpGet("GetCustomerLookup")]
     public async Task<ActionResult<ApiSuccessResult<GetCustomerLookupResult>>> GetCustomerLookupAsync(
         CancellationToken cancellationToken)

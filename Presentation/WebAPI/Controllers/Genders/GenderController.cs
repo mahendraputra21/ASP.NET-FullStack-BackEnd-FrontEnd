@@ -8,6 +8,7 @@ using Application.Features.Genders.Queries;
 using Domain.Entities;
 using Infrastructure.DataAccessManagers.EFCores.ODatas;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 using WebAPI.Common.Filters;
@@ -102,7 +103,7 @@ public class GenderController : BaseApiController
 
 
 
-    [ClaimBasedAuthorization("Read")]
+    [Authorize]
     [HttpGet("GetGenderLookup")]
     public async Task<ActionResult<ApiSuccessResult<GetGenderLookupResult>>> GetGenderLookupAsync(
         CancellationToken cancellationToken)

@@ -16,73 +16,22 @@ toggleButton.addEventListener('click', () => {
 });
 
 // Menu data structure
-const menuData = [
-    {
-        "ParentName": "Dashboard",
-        "ParentCaption": "Dashboard",
-        "ParentUrl": "#",
-        "Children": [
-            {
-                "Name": "Dashboard",
-                "Caption": "Dashboard",
-                "Url": "/Dashboards"
-            }
-        ]
-    },
-    {
-        "ParentName": "ThirdParty",
-        "ParentCaption": "Third Party",
-        "ParentUrl": "#",
-        "Children": [
-            { "Name": "Customer", "Caption": "Customer", "Url": "/Customers" },
-            { "Name": "CustomerContact", "Caption": "Customer Contact", "Url": "/CustomerContacts" },
-            { "Name": "CustomerGroup", "Caption": "Customer Group", "Url": "/CustomerGroups" },
-            { "Name": "CustomerSubGroup", "Caption": "Customer SubGroup", "Url": "/CustomerSubGroups" },
-            { "Name": "Vendor", "Caption": "Vendor", "Url": "/Vendors" },
-            { "Name": "VendorContact", "Caption": "Vendor Contact", "Url": "/VendorContacts" },
-            { "Name": "VendorGroup", "Caption": "Vendor Group", "Url": "/VendorGroups" },
-            { "Name": "VendorSubGroup", "Caption": "Vendor SubGroup", "Url": "/VendorSubGroups" }
-        ]
-    },
-    {
-        "ParentName": "Settings",
-        "ParentCaption": "Settings",
-        "ParentUrl": "#",
-        "Children": [
-            { "Name": "Config", "Caption": "Config", "Url": "/Configs" },
-            { "Name": "Currency", "Caption": "Currency", "Url": "/Currencies" },
-            { "Name": "Gender", "Caption": "Gender", "Url": "/Genders" },
-        ]
-    },
-    {
-        "ParentName": "Profile",
-        "ParentCaption": "Profile",
-        "ParentUrl": "#",
-        "Children": [
-            { "Name": "UserProfile", "Caption": "User Profile", "Url": "/UserProfiles" }
-        ]
-    },
-    {
-        "ParentName": "RoleMembership",
-        "ParentCaption": "Role & Membership",
-        "ParentUrl": "#",
-        "Children": [
-            { "Name": "Role", "Caption": "Role", "Url": "/Roles" },
-            { "Name": "Claim", "Caption": "Claim", "Url": "/Claims" },
-            { "Name": "Member", "Caption": "Member", "Url": "/Members" }
-        ]
-    }
-];
+const storedMenu = localStorage.getItem('mainNavigations');
+let menuData = [];
+if (storedMenu) {
+    menuData = JSON.parse(storedMenu);
+} else {
+    console.log('Menu data not found in localStorage.');
+}
 
-// Retrieve selected menu from localStorage
 const selectedMenu = localStorage.getItem('selected-menu');
 
 // Generate menu items
-menuData.forEach(parent => {
+menuData?.forEach(parent => {
     const parentItem = document.createElement('div');
     parentItem.className = 'menu-item';
     parentItem.innerHTML = `
-        <span>${parent.ParentCaption}</span>
+        <span>${parent.caption}</span>
         <span class="caret">&#9656;</span> <!-- Caret for submenu -->
     `;
     menuContainer.appendChild(parentItem);
@@ -93,14 +42,22 @@ menuData.forEach(parent => {
 
     let isChildSelected = false; // Track if a child item is selected
 
-    parent.Children.forEach(child => {
+    parent?.children?.forEach(child => {
         const childItem = document.createElement('a');
-        childItem.href = child.Url;
+        childItem.href = child?.url;
         childItem.className = 'menu-item';
-        childItem.innerText = child.Caption;
+        childItem.innerText = child?.caption;
+
+        // Jika child tidak diizinkan (isAuthorized = false), tambahkan icon gembok
+        if (!child?.isAuthorized) {
+            const lockIcon = document.createElement('span');
+            lockIcon.className = 'lock-icon'; // Berikan class untuk styling icon
+            lockIcon.innerHTML = '🔒'; // Anda bisa menggunakan ikon gembok lain (misal dari FontAwesome)
+            childItem.appendChild(lockIcon); // Tambahkan icon ke elemen childItem
+        }
 
         // Check if the current URL matches the menu item URL or matches selected-menu from localStorage
-        if (selectedMenu === child.Name || window.location.pathname === child.Url) {
+        if (selectedMenu === child?.name || window.location.pathname === child?.url) {
             childItem.classList.add('menu-selected');
             submenu.classList.add('open'); // Automatically open the parent submenu
             const caret = parentItem.querySelector('.caret');
@@ -110,7 +67,7 @@ menuData.forEach(parent => {
 
         // Add event listener to save selected menu to localStorage when clicked
         childItem.addEventListener('click', () => {
-            localStorage.setItem('selected-menu', child.Name); // Save clicked menu name
+            localStorage.setItem('selected-menu', child?.name); // Save clicked menu name
         });
 
         submenu.appendChild(childItem);
@@ -127,15 +84,13 @@ menuData.forEach(parent => {
     });
 });
 
-// Ambil data dari localStorage dan hilangkan tanda kutip jika ada
 const firstName = localStorage.getItem('firstName')?.replace(/"/g, '');
 const lastName = localStorage.getItem('lastName')?.replace(/"/g, '');
 
-// Jika firstName dan lastName ada di localStorage, tampilkan
 if (firstName && lastName) {
     document.getElementById('username').textContent = `${firstName} ${lastName}`;
 } else {
-    document.getElementById('username').textContent = 'UserName'; // Fallback jika tidak ada data
+    document.getElementById('username').textContent = 'UserName'; 
 }
 
 //Get currently active config
@@ -145,16 +100,16 @@ fetch('/api/Config/GetActiveConfig', {
         'Content-Type': 'application/json',
     }
 })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-    })
-    .then(data => {
-        document.getElementById('activeConfig').textContent = data?.content?.data?.name;
-        document.getElementById('activeCurrency').textContent = data?.content?.data?.currencyName;
-    })
-    .catch(error => {
-        console.error('Error during API call:', error);
-    });
+.then(response => {
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
+})
+.then(data => {
+    document.getElementById('activeConfig').textContent = data?.content?.data?.name;
+    document.getElementById('activeCurrency').textContent = data?.content?.data?.currencyName;
+})
+.catch(error => {
+    console.error('Error during API call:', error);
+});

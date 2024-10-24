@@ -21,6 +21,7 @@ public class UserSeeder
     public async Task GenerateDataAsync()
     {
         var staffRole = "Staff";
+        var basicRole = "Basic";
 
         var users = new List<(string FirstName, string LastName, string Email, string Password)>
             {
@@ -54,6 +55,10 @@ public class UserSeeder
                 if (!await _userManager.IsInRoleAsync(applicationUser, staffRole))
                 {
                     await _userManager.AddToRoleAsync(applicationUser, staffRole);
+                }
+                if (!await _userManager.IsInRoleAsync(applicationUser, basicRole))
+                {
+                    await _userManager.AddToRoleAsync(applicationUser, basicRole);
                 }
             }
         }

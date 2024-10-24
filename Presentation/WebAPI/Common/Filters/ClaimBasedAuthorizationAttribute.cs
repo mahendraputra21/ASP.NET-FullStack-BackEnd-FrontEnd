@@ -25,7 +25,7 @@ public class ClaimBasedAuthorizationAttribute : ActionFilterAttribute
         var user = context.HttpContext.User;
         if (!user.Claims.Any(c => c.Type == "Permission" && c.Value == requiredClaim))
         {
-            context.Result = new ForbidResult();
+            context.Result = new UnauthorizedResult();
         }
 
         base.OnActionExecuting(context);

@@ -67,6 +67,7 @@ html, body {
 /* Mengatur scrollbar untuk browser berbasis WebKit (Chrome, Safari, Edge) */
 ::-webkit-scrollbar {
     width: 8px; /* Lebar scrollbar */
+    height: 8px; /* Untuk scrollbar horizontal */
 }
 
 ::-webkit-scrollbar-thumb {

@@ -257,27 +257,31 @@ const app = createApp({
         onMounted(async () => {
             await checkPageAccess()
             setTimeout(async () => {
+                try {
+                    const response = await request('get', '/Dashboard/GetDashboardMain', {})
 
-                const response = await request('get', '/Dashboard/GetDashboardMain', {})
+                    if (response) {
+                        customerContacts.value = response?.data?.content?.data?.customerContacts ?? []
+                        vendorContacts.value = response?.data?.content?.data?.vendorContacts ?? []
 
-                if (response) {
-                    customerContacts.value = response?.data?.content?.data?.customerContacts ?? []
-                    vendorContacts.value = response?.data?.content?.data?.vendorContacts ?? []
+                        customers.value = Array.from(new Set(customerContacts.value.filter(item => item?.customerName).map(item => item.customerName)))
+                        vendors.value = Array.from(new Set(vendorContacts.value.filter(item => item?.vendorName).map(item => item.vendorName)))
+                    }
+                } catch (error) {
+                    console.error('Error during API call:', error);
+                } finally {
+                    pageLoading.value = false
 
-                    customers.value = Array.from(new Set(customerContacts.value.filter(item => item?.customerName).map(item => item.customerName)))
-                    vendors.value = Array.from(new Set(vendorContacts.value.filter(item => item?.vendorName).map(item => item.vendorName)))
+                    await nextTick()
+                    await drawBarChartCustomer()
+                    await drawBarChartVendor()
+                    await drawPieChart()
+                    await drawRingChart()
+                    await drawGaugeChartVendor()
+                    await drawGaugeChartCustomer()
                 }
-                
-                pageLoading.value = false
+            }, 1000)
 
-                await nextTick()
-                await drawBarChartCustomer()
-                await drawBarChartVendor()
-                await drawPieChart()
-                await drawRingChart()
-                await drawGaugeChartVendor()
-                await drawGaugeChartCustomer()
-            }, 1000) 
         })
         return {
             pageLoading,
