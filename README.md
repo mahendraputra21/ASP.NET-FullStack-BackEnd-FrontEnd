@@ -1,10 +1,5 @@
-# ASP.NET Core Full-Stack Web Development
+# ASP.NET Core Full-Stack Web Development: Back End with REST API, Clean Architecture, DDD, CQRS, Repository, OData & Front End with Razor Pages, Vue.js
 
-## Back End with REST API, Clean Architecture, DDD, CQRS, Repository, OData  
-**&**  
-## Front End with Razor Pages, Vue.js
-
----
 
 Welcome to the accompanying source code for the book **"ASP.NET Core Full-Stack Web Development"**. This project serves as a practical guide to implement the full-stack development concepts discussed in the book. Below is an overview of the two major sections covered in this repository:
 
@@ -37,8 +32,7 @@ Thank you for your interest in this project and the book! Your support is greatl
 You can download the book in PDF format for free:
 ![Book Cover](book-cover.png)
 
-[Download ASP.NET Core Full-Stack Web Development PDF](https://github.com/go2ismail/ASP.NET-FullStack-BackEnd-FrontEnd/raw/main/ASPNET-FullStack-Development-Back-End-Front-End.pdf)
-
+[Download ASP.NET Core Full-Stack Web Development PDF](ASPNET-FullStack-Development-Back-End-Front-End.pdf)
 
 ## License
 This project is open source and available under the [MIT License](LICENSE).
