@@ -33,5 +33,12 @@ The Front End is developed with **ASP.NET Core Razor Pages** and integrated with
 ## Thank You
 Thank you for your interest in this project and the book! Your support is greatly appreciated. If you find this repository helpful, please consider giving it a ⭐️ on GitHub. This will help the project grow and reach more developers like you!
 
+## Download the Book
+You can download the book in PDF format for free:
+![Book Cover](book-cover.png)
+
+[Download ASP.NET Core Full-Stack Web Development PDF](ASPNET-FullStack-Development-Back-End-Front-End.pdf)
+
+
 ## License
 This project is open source and available under the [MIT License](LICENSE).
