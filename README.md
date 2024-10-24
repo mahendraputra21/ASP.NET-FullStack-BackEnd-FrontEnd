@@ -37,7 +37,7 @@ Thank you for your interest in this project and the book! Your support is greatl
 You can download the book in PDF format for free:
 ![Book Cover](book-cover.png)
 
-[Download ASP.NET Core Full-Stack Web Development PDF](https://github.com/go2ismail/ASP.NET-FullStack-BackEnd-FrontEnd/raw/main/path-to-your-file)
+[Download ASP.NET Core Full-Stack Web Development PDF](https://github.com/go2ismail/ASP.NET-FullStack-BackEnd-FrontEnd/raw/main/ASPNET-FullStack-Development-Back-End-Front-End)
 
 
 ## License
