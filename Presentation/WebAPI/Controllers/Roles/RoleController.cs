@@ -8,6 +8,7 @@ using Application.Features.Accounts.Queries;
 using global::WebAPI.Common.Filters;
 using global::WebAPI.Common.Models;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers.Roles;
@@ -118,7 +119,7 @@ public class RoleController : BaseApiController
 
 
 
-    [ClaimBasedAuthorization("Read")]
+    [Authorize]
     [HttpGet("GetRoleLookup")]
     public async Task<ActionResult<ApiSuccessResult<GetRoleLookupResult>>> GetRoleLookupAsync(
         CancellationToken cancellationToken)
