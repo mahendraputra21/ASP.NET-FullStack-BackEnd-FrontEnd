@@ -44,7 +44,7 @@ public class UpdateMemberValidator : AbstractValidator<UpdateMemberRequest>
             .NotEmpty();
 
         RuleFor(x => x.ConfirmPassword)
-            .Equal(x => x.Password).WithMessage("Password and Confirm Password should equal.");
+            .Equal(x => x.Password).WithMessage("Should equal with Password.");
 
         RuleFor(x => x.Roles)
             .NotNull();
