@@ -8,6 +8,7 @@ using Application.Features.CustomerSubGroups.Queries;
 using Domain.Entities;
 using Infrastructure.DataAccessManagers.EFCores.ODatas;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 using WebAPI.Common.Filters;
@@ -104,7 +105,7 @@ public class CustomerSubGroupController : BaseApiController
         });
     }
 
-    [ClaimBasedAuthorization("Read")]
+    [Authorize]
     [HttpGet("GetCustomerSubGroupLookup")]
     public async Task<ActionResult<ApiSuccessResult<GetCustomerSubGroupLookupResult>>> GetCustomerSubGroupLookupAsync(
         [FromQuery] string? customerGroupId,

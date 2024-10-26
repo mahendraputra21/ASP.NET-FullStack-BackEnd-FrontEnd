@@ -8,6 +8,7 @@ using Application.Features.VendorSubGroups.Queries;
 using Domain.Entities;
 using Infrastructure.DataAccessManagers.EFCores.ODatas;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 using WebAPI.Common.Filters;
@@ -104,7 +105,7 @@ public class VendorSubGroupController : BaseApiController
         });
     }
 
-    [ClaimBasedAuthorization("Read")]
+    [Authorize]
     [HttpGet("GetVendorSubGroupLookup")]
     public async Task<ActionResult<ApiSuccessResult<GetVendorSubGroupLookupResult>>> GetVendorSubGroupLookupAsync(
         [FromQuery] string? vendorGroupId,
