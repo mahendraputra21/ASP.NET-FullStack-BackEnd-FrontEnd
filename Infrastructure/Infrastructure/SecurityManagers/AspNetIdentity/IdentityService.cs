@@ -485,6 +485,7 @@ public class IdentityService : IIdentityService
         user.EmailConfirmed = emailConfirmed;
         user.IsBlocked = isBlocked;
         user.IsDeleted = isDeleted;
+        user.UpdatedAt = DateTime.UtcNow;
 
         var result = await _userManager.UpdateAsync(user);
 
@@ -539,6 +540,7 @@ public class IdentityService : IIdentityService
         }
 
         user.ProfilePictureName = profilePictureName;
+        user.UpdatedAt = DateTime.UtcNow;
 
         var result = await _userManager.UpdateAsync(user);
 

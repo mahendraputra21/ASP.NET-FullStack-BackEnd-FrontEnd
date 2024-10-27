@@ -28,7 +28,7 @@ public class ApplicationUserConfiguration : IEntityTypeConfiguration<Application
             .IsRequired();
 
         builder.Property(u => u.CreatedAt)
-            .IsRequired();
+            .IsRequired(false);
 
         builder.Property(u => u.CreatedById)
             .HasMaxLength(UserIdConsts.MaxLength);
