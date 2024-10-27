@@ -294,9 +294,13 @@ const app = createApp({
                             await getDataTable()
                             paged.selectedRow = {}
                             formData.id = response?.data?.content?.id
+                            formData.password = null
+                            formData.confirmPassword = null
                             Object.assign(paged.selectedRow, formData)
                         } else {
                             await getDataTable()
+                            formData.password = null
+                            formData.confirmPassword = null
                             Object.assign(paged.selectedRow, formData)
                         }
 

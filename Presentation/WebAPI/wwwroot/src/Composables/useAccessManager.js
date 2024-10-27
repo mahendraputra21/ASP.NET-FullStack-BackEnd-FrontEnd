@@ -66,9 +66,8 @@ export function useAccessManager() {
         return await checkAuthorization()
     }
 
-    const hasClaimAccess = async (claim) => {
+    const hasClaimAccess = (claim) => {
         const userClaims = getUserClaims() || []
-
         if (requiredKey.value && Array.isArray(userClaims)) {
             return userClaims.includes(claim)
         } else {
