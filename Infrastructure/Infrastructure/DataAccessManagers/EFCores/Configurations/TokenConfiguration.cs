@@ -28,7 +28,7 @@ public class TokenConfiguration : BaseEntityConfiguration<Token>
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.Property(e => e.RefreshToken)
-            .HasMaxLength(TokenConsts.MaxLength)
+            .HasMaxLength(LengthConsts.M)
             .IsRequired();
 
         builder.HasIndex(e => e.UserId).HasDatabaseName("IX_Token_UserId");
