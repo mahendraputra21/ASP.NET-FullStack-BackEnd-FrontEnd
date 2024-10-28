@@ -7,16 +7,19 @@ using Application.Services.CQS.Queries;
 using Application.Services.Externals;
 using MailKit.Net.Smtp;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using MimeKit;
 
 namespace Infrastructure.EmailManagers;
 
 public class EmailService : IEmailService
 {
+    private readonly ILogger<EmailService> _logger;
     private readonly IQueryContext _context;
     private readonly IEncryptionService _encryptionService;
-    public EmailService(IQueryContext context, IEncryptionService encryptionService)
+    public EmailService(ILogger<EmailService> logger, IQueryContext context, IEncryptionService encryptionService)
     {
+        _logger = logger;
         _context = context;
         _encryptionService = encryptionService;
     }
@@ -30,24 +33,32 @@ public class EmailService : IEmailService
 
         if (defaultConfig != null)
         {
-            var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("noreply", ""));
-            message.To.Add(new MailboxAddress(email, email));
-            message.Subject = subject;
-
-            var bodyBuilder = new BodyBuilder
+            try
             {
-                HtmlBody = htmlMessage
-            };
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress("noreply", ""));
+                message.To.Add(new MailboxAddress(email, email));
+                message.Subject = subject;
 
-            message.Body = bodyBuilder.ToMessageBody();
+                var bodyBuilder = new BodyBuilder
+                {
+                    HtmlBody = htmlMessage
+                };
 
-            using (var client = new SmtpClient())
+                message.Body = bodyBuilder.ToMessageBody();
+
+                using (var client = new SmtpClient())
+                {
+                    await client.ConnectAsync(defaultConfig.SmtpHost, defaultConfig.SmtpPort, true);
+                    await client.AuthenticateAsync(defaultConfig.SmtpUserName, _encryptionService.Decrypt(defaultConfig.SmtpPassword));
+                    await client.SendAsync(message);
+                    await client.DisconnectAsync(true);
+                }
+
+            }
+            catch (Exception ex)
             {
-                await client.ConnectAsync(defaultConfig.SmtpHost, defaultConfig.SmtpPort, true);
-                await client.AuthenticateAsync(defaultConfig.SmtpUserName, _encryptionService.Decrypt(defaultConfig.SmtpPassword));
-                await client.SendAsync(message);
-                await client.DisconnectAsync(true);
+                _logger.LogError(ex.Message);
             }
 
         }
