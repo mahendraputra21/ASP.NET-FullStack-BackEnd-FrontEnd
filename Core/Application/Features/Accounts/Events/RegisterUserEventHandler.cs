@@ -22,17 +22,20 @@ public class RegisterUserEventHandler : INotificationHandler<RegisterUserEvent>
         if (!notification.SendEmailConfirmation)
         {
             Console.WriteLine($"Handling event for: {notification.Email}. Not sending email confirmation");
+        } else
+        {
+
+            Console.WriteLine($"Handling event for: {notification.Email}. Sending email confirmation");
+
+            var callbackUrl = $"{notification.Host}/Accounts/ConfirmEmail?email={notification.Email}&code={notification.EmailConfirmationToken}";
+            var encodeCallbackUrl = $"{HtmlEncoder.Default.Encode(callbackUrl)}";
+
+            var emailSubject = $"Confirm your email";
+            var emailMessage = $"Please confirm your account by <a href='{encodeCallbackUrl}'>clicking here</a>.";
+
+            await _emailService.SendEmailAsync(notification.Email, emailSubject, emailMessage);
+
         }
-
-        Console.WriteLine($"Handling event for: {notification.Email}. Sending email confirmation");
-
-        var callbackUrl = $"{notification.Host}/Accounts/ConfirmEmail?email={notification.Email}&code={notification.EmailConfirmationToken}";
-        var encodeCallbackUrl = $"{HtmlEncoder.Default.Encode(callbackUrl)}";
-
-        var emailSubject = $"Confirm your email";
-        var emailMessage = $"Please confirm your account by <a href='{encodeCallbackUrl}'>clicking here</a>.";
-
-        await _emailService.SendEmailAsync(notification.Email, emailSubject, emailMessage);
     }
 }
 
