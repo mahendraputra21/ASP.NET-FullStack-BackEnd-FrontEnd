@@ -360,7 +360,7 @@ const app = createApp({
                 const data = response?.data?.content?.users
                 if (data) {
                     paged.data = data
-                    const response = await request('get', `/FileOperation/GetImage?imageName=${paged.data?.[0]?.profilePictureName || ''}`, {}, {}, 'blob')                    
+                    const response = await request('get', `/FileOperation/GetImage?imageName=${paged.data?.[0]?.profilePictureName || ''}`, {}, {}, 'blob') 
                     imageUrl.value = URL.createObjectURL(response.data)
                 }
             } catch (error) {

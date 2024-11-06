@@ -85,7 +85,7 @@ public class DocumentService : IDocumentService
 
         if (!File.Exists(filePath))
         {
-            filePath = Path.Combine(_folderPath, "wwwroot", fileName);
+            filePath = Path.Combine(_folderPath, "wwwroot", "nofile.txt");
         }
 
         var result = await File.ReadAllBytesAsync(filePath, cancellationToken);
