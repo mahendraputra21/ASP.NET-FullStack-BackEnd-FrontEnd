@@ -38,6 +38,6 @@ You can download the book in PDF format for free:
 This project is open source and available under the [MIT License](LICENSE).
 
 ## Need Production-Ready Codebase?
-![Enterprise Full Stack Application](https://store.indotalent.com/cdn/shop/files/aspnet-wms-fs-hero6_08693210-6483-41d1-a67d-b7da8242b71c_1024x1024@2x.png?v=1736227404)
+![Enterprise Full Stack Application](https://store.indotalent.com/cdn/shop/files/aspnet-wms-fs-hero6_1f3bb4d4-6a12-47ae-b31b-1e60e655e3b2_1024x1024@2x.png?v=1736228154)
 
 [Get the Source Code and Book Now](https://store.indotalent.com/collections/featured-product/products/inventory-wms-full-stack-edition)
