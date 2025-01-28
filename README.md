@@ -37,7 +37,37 @@ You can download the book in PDF format for free:
 ## License
 This project is open source and available under the [MIT License](LICENSE).
 
-## Need Production-Ready Codebase?
-![Enterprise Full Stack Application](https://store.indotalent.com/cdn/shop/files/aspnet-wms-fs-hero6_1f3bb4d4-6a12-47ae-b31b-1e60e655e3b2_1024x1024@2x.png?v=1736228154)
+# Starred  
+Love this project? Show your support by giving us a star on GitHub! ⭐  
+Your support helps us continue developing and improving this project to deliver even greater value to the community.  
 
-[Get the Source Code and Book Now](https://store.indotalent.com/collections/featured-product/products/inventory-wms-full-stack-edition)
+
+---
+# 🌱 Help Us Grow!  
+Please help us grow by sharing it with your friends, family, and colleagues!  
+
+Every share helps us reach more people, grow the community, and continue improving this open-source project. ⭐  
+Together, we can build something even greater—thank you for being a part of this journey!  
+
+---
+
+# Supporters  
+
+This project is proudly supported by **INDOTALENT**, your trusted partner for professional software solutions.  
+
+Providing a fully functional **ASP.NET Core Full Stack Application** with an enterprise-grade **Headless API**, this solution features a **decoupled business process architecture** that ensures total separation between the back-end API and the front-end UI.  
+
+Built with **Clean Architecture, CQRS, and MediatR**, it delivers unparalleled flexibility and scalability for modern development needs.  
+
+And the price? It's **lower than your employee's T-shirts**, offering incredible value for your investment!  
+Don’t miss this opportunity to supercharge your development with a cutting-edge, production-ready solution! 🚀  
+
+🎉 **Exclusive Offer:** Get an incredible **50% discount** on their products using the code **GITHUB50**.  
+
+🌐 Visit now: [https://store.indotalent.com](https://store.indotalent.com)  
+
+[![store-indotalent](https://cdn.shopify.com/s/files/1/0097/8422/9945/files/store-indotalent-hero.png?v=1737235553)](https://store.indotalent.com)
+### ✅ **How does Mini CRM help SMBs manage operations, drive growth, and streamline payroll?**
+[![powerfull-mini-crm](https://cdn.shopify.com/s/files/1/0097/8422/9945/files/powerfull-mini-crm-for-smb.png?v=1737992595)](https://store.indotalent.com)
+[![katenjo-crm-saas](https://store.indotalent.com/cdn/shop/files/hero1_f05d44f6-1298-4d0c-a46d-05395a7731d1_1024x1024@2x.png?v=1737932377)](https://store.indotalent.com/collections/featured-product/products/katenjo-crm-full-stack-edition-saas-multi-tenant)
+
